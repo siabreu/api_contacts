@@ -25,4 +25,32 @@ class Api::V1::ContactsController < Api::V1:ApiController
     end
   end
 
+  # PATCH /api/v1/contacts/1
+  def update
+    if @contact.update(contact_params)
+      render json: @contact
+    else
+      render json: @contact.erros, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /api/v1/contacts/1
+  def destroy
+    @contact.destroy
+  end
+
+  private
+    def set_contact
+      @contact = Contact.find(params[:id])
+    end
+
+    def contact_params
+      params.require(:contact).permit(:name, :email, :phone, :description)
+    end
+
+    def require_authentication!
+      unless current_user == @contact.user
+        render json: {}, status: :forbidden 
+      end
+    end
 end
