@@ -1,4 +1,4 @@
-class Api::V1::ContactsController < Api::V1:ApiController
+class Api::V1::ContactsController < Api::V1::ApiController
   before_action :set_contact, only: [:show, :update, :destroy]
   before_action :require_authentication!, only: [:show, :update, :destroy]
 
