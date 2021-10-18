@@ -11,12 +11,11 @@ class Api::V1::ContactsController < Api::V1::ApiController
 
   # GET /api/v1/contacts/1
   def show
-    render json: @contacts
+    render json: @contact
   end
 
   # POST /api/v1/contacts
   def create
-    byebug
     @contact = Contact.new(contact_params.merge(user: current_user))
 
     if @contact.save
