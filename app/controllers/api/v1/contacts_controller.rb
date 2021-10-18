@@ -4,7 +4,7 @@ class Api::V1::ContactsController < Api::V1::ApiController
 
   # GET /api/v1/contacts
   def index
-    @contacts = current_user.Contacts
+    @contacts = current_user.contacts
 
     render json: @contacts
   end
@@ -16,6 +16,7 @@ class Api::V1::ContactsController < Api::V1::ApiController
 
   # POST /api/v1/contacts
   def create
+    byebug
     @contact = Contact.new(contact_params.merge(user: current_user))
 
     if @contact.save
